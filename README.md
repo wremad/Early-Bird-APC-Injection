@@ -1,15 +1,47 @@
-This repository demonstrates an Early-Bird Asynchronous Procedure Call (APC) injection technique on Windows, focusing on process creation timing and APC delivery behavior.
+# Early-Bird APC Injection
 
-The implementation explores how queuing an APC during the early stages of process initialization, using the DEBUG_PROCESS creation flag, allows execution to occur before the target process reaches its real entry point. This approach avoids reliance on a thread later entering an alertable state and highlights why execution timing is critical to APC-based techniques.
+This repository demonstrates **Early-Bird Asynchronous Procedure Call (APC) injection** on Windows, with a focus on **process creation timing** and **APC delivery behavior** during early process initialization.
 
-The project is intended for educational and defensive security research purposes, with emphasis on:
+The project explores how queuing an APC during the initial stages of a process—using the `DEBUG_PROCESS` creation flag—allows execution to occur **before the target process reaches its actual entry point**. This removes the dependency on a thread later entering an alertable state and highlights why timing is critical for APC-based techniques.
 
-Windows process and thread initialization
+---
 
-APC scheduling mechanics
+## Overview
 
-Memory allocation and protection transitions
+Early-Bird APC injection leverages the Windows APC mechanism but differs from traditional APC injection by targeting execution **before normal user-mode code begins**. By intervening early in the process lifecycle, queued APCs can be delivered as execution starts, making this technique more reliable than standard APC injection.
 
-Understanding why certain injection techniques succeed or fail in practice
+This repository is intended to support:
+- Understanding Windows process and thread initialization
+- Studying APC scheduling and delivery mechanics
+- Security research and detection engineering
+- Analysis of why certain injection techniques succeed or fail
 
-This code is provided to support learning, analysis, and detection engineering—not for misuse.
+---
+
+## High-Level Flow
+
+1. A target process is created using debugging-related creation flags  
+2. Memory is allocated within the target process  
+3. A payload is written and prepared for execution  
+4. An APC is queued to the primary thread early in execution  
+5. When execution resumes, Windows delivers the APC before the real entry point  
+
+---
+
+
+## Screenshot / Diagram
+
+![Early-Bird APC Injection Overview]("C:\Users\Intel\Desktop\Early Bird 1.png")
+
+## Disclaimer
+
+This project is provided **strictly for educational and defensive security research purposes**.  
+It is intended to improve understanding of Windows internals and detection logic.  
+Do not use this code in environments or contexts where you do not have explicit authorization.
+
+---
+
+## Feedback
+
+This is an ongoing learning effort.  
+Feedback, corrections, and discussion are welcome.
