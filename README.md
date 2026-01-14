@@ -29,7 +29,7 @@ This repository is intended to support:
 ---
 
 
-## Screenshot / Diagram
+## Screenshot
 <img width="1624" height="968" alt="Early Bird 1" src="https://github.com/user-attachments/assets/17516ef8-34a2-498b-b900-6b92a8a60da1" />
 
 
